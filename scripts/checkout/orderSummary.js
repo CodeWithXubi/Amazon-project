@@ -4,6 +4,7 @@ import { formatCurrency } from '../utils/money.js';
 import {hello} from 'https://unpkg.com/supersimpledev@1.0.1/hello.esm.js';
 import {deliveryOptions, getDeliveryOption} from '../../data/deliveryOptions.js';
 import{renderPaymentSummary} from './paymentSummary.js'
+import dayjs from "https://unpkg.com/dayjs@1/esm/index.js"
 
 export function renderOrderSummary(){
     let cartSummaryHTML = '';
@@ -23,7 +24,8 @@ export function renderOrderSummary(){
         const dateString = deliveryDate.format('dddd, MMMM D');
 
       cartSummaryHTML+= `
-        <div class="cart-item-container js-cart-item-container-${matchingProduct.id}">
+        <div class="cart-item-container js-cart-item-container
+         js-cart-item-container-${matchingProduct.id}">
                 <div class="delivery-date">
                 ${dateString}
                 </div>
@@ -98,7 +100,10 @@ export function renderOrderSummary(){
       return html;
     }
 
-    document.querySelector('.js-order-summary').innerHTML = cartSummaryHTML;
+    const orderSummaryElement = document.querySelector('.js-order-summary');
+    if (orderSummaryElement) {
+      orderSummaryElement.innerHTML = cartSummaryHTML;
+    }    
 
     document.querySelectorAll('.js-delete-link').forEach((link)=>{
         link.addEventListener('click',()=>{
