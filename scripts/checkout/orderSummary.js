@@ -127,5 +127,3 @@ export function renderOrderSummary() {
     });
   });
 };
-
-renderOrderSummary();
