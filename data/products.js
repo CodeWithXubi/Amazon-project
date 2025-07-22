@@ -95,9 +95,9 @@ object3.method()
 export let products = []
 
 export function loadProductsFetch() {
- const promise = fetch(
-  'https://supersimplebackend.dev/products'
- ).then((response) => {
+  const promise = fetch(
+    'https://supersimplebackend.dev/products'
+  ).then((response) => {
     return response.json()
   }).then((productsData) => {
     products = productsData.map((productDetails) => {
@@ -108,10 +108,14 @@ export function loadProductsFetch() {
     });
 
     console.log('load products');
+  }).catch((error)=>{
+    console.log('unexpected error. Please try again later.');
+    console.log(error);
+    
   });
 
   return promise
-}
+};
 /*
 
 loadProductsFetch().then(()=> {
@@ -136,10 +140,14 @@ export function loadProducts(fun) {
 
   });
 
+  xhr.addEventListener('error', () => {
+    console.log('unexpected error. Please try again later.');
+
+  })
+
   xhr.open('GET', 'https://supersimplebackend.dev/products')
   xhr.send();
 }
-
 // export const products = [
 //   {
 //     id: "e43638ce-6aa0-4b85-b27f-e1d07eb678c6",
